@@ -1,9 +1,7 @@
-
-
-import { SignUp } from "@clerk/nextjs";
+import { SignIn} from "@clerk/nextjs";
 import { Container, Box, Typography } from "@mui/material";
 
-export default function signInPage() {
+export default function signUpPage() {
 
     return (
         <Container maxWidth="sm">
@@ -15,9 +13,9 @@ export default function signInPage() {
             justifyContent={'center'}
             >
                 <Typography variant="h5" gutterBottom>
-                    Sign-In
+                    Sign-Up
                 </Typography>
-                <SignUp/>
+                <SignIn/>
             </Box>
         </Container>
 
