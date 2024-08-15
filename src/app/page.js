@@ -36,24 +36,83 @@ export default function Home() {
         flexWrap='wrap'
         gap={5}
         >
-          <Box flex={1}>
-          <Typography>Generate Flashcard Instantly</Typography>
-          <Typography>You can generate flashcards almost immediately by putting in 
-            your word. </Typography>
+          <Box 
+          flex={1}
+          display='Grid'
+          gridTemplateRows='auto auto'
+          gap={1}
+          boxShadow={5}
+          padding='10px'
+          >
+          <Typography color='primary'>Generate Flashcard Instantly</Typography>
+          <Typography>Generate flashcard immediately with our fast AI genarated flashcard saas </Typography>
           </Box>
 
-          <Box flex={1}>
-          <Typography>Generate Flashcard Instantly</Typography>
-          <Typography>You can generate flashcards almost immediately by putting in 
-            your word. </Typography>
+          <Box 
+          flex={1}
+          display='Grid'
+          gridTemplateRows='auto auto'
+          gap={1}
+          boxShadow={5}
+          padding='10px'
+          >
+          <Typography color='primary'>Study anywhere anytime</Typography>
+          <Typography>You can access you flashcard anywhere and anytime. Just logon to your
+            account.</Typography>
           </Box>
 
-          <Box flex={1}>
-          <Typography>Generate Flashcard Instantly</Typography>
+          <Box 
+          flex={1}
+          display='Grid'
+          gridTemplateRows='auto auto'
+          gap={1}
+          boxShadow={5}
+          padding='10px'
+          >
+          <Typography color='primary'>Generate Flashcard Instantly</Typography>
           <Typography>You can generate flashcards almost immediately by putting in 
             your word. </Typography>
           </Box>
         </Box>
+      </Box>
+
+      {/* Pricing section */}
+      <Box sx={{my: 6}} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
+        <Typography variant="h4" component="h2" gutterBottom>Pricing</Typography>
+        <Box
+        display='flex'
+        padding='30px'
+        flexDirection='row'
+        justifyContent='space-between'
+        flexWrap='wrap'
+        gap={5}
+        
+        >
+          <Box
+          boxShadow={3}
+          display={'grid'}
+          gridTemplateRows={'auto auto auto'}
+          padding={'20px'}
+          >
+            <Typography variant="h7" component="h5">Plus Subcription</Typography>
+            <Typography variant="h2">$0.99</Typography>
+            <Button variant="contained" href="/payment">Choose</Button>
+          </Box>
+
+          <Box
+          boxShadow={3}
+          display={'grid'}
+          gridTemplateRows={'auto auto auto'}
+          padding={'20px'}
+          >
+            <Typography variant="h7" component="h5">Plus Subcription</Typography>
+            <Typography variant="h2">$4.99</Typography>
+            <Button variant="contained" href="/payment">Choose</Button>
+          </Box>
+
+        </Box>
+
+      
       </Box>
 
     </Container>
