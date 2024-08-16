@@ -1,6 +1,6 @@
 
 import { Button,Box, Typography, AppBar, Toolbar } from "@mui/material";
-import { ClerkProvider, SignedOut, SignedIn, UserButton  } from "@clerk/nextjs";
+import { SignedOut, SignedIn, UserButton  } from "@clerk/nextjs";
 
 
 
@@ -22,7 +22,7 @@ export default function Navbar() {
                     <SignedIn>
                         <UserButton />
                     </SignedIn>
-                
+
                 
             </Toolbar>
         </AppBar>
