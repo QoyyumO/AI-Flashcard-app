@@ -20,7 +20,7 @@ export async function POST(req) {
         line_items: [
             {
             price_data: {
-                currency: 'usd', 
+                currency: 'gbp', 
                 product_data: {
                 name: 'Pro subscription',
                 },
