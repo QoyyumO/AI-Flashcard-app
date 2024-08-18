@@ -6,9 +6,30 @@ import { Box, Typography, Button, Container, Grid } from "@mui/material";
 import Navbar from "./components/Navbar";
 import Link from 'next/link';
 import getStripe from "../../Utils/get-stripe";
+import { useState } from 'react';
 
 
 export default function Home() {
+  const [price, setPrice] = useState(0)
+
+  const handleSubmit = async () => {
+    const checkoutSession = await fetch('/api/checkout_sessions', {
+      method: 'POST',
+      headers: { origin: 'http://localhost:3000' },
+    })
+    const checkoutSessionJson = await checkoutSession.json()
+  
+    const stripe = await getStripe()
+    const {error} = await stripe.redirectToCheckout({
+      sessionId: checkoutSessionJson.id,
+    })
+  
+    if (error) {
+      console.warn(error.message)
+    }
+  }
+
+
   return (
     <Container maxWidth="md">
       <Box sx={{textAlign: 'center', my: 4}}>
@@ -106,7 +127,7 @@ export default function Home() {
               <Typography gutterBottom>
                 Access to basic feature and limited storage.
               </Typography>
-              <Button variant="contained" color="primary">Choose Basic</Button>
+              <Button variant="contained" color="primary" onClick={() => {setPrice(0.99); handleClick() } }>Choose Basic</Button>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={6} >
@@ -123,7 +144,7 @@ export default function Home() {
               <Typography gutterBottom>
                 Unlimited flashcards and storage for your flashcards.
               </Typography>
-              <Button variant="contained" color="primary">Choose Pro</Button>
+              <Button variant="contained" color="primary" onClick={() => {setPrice(4.99); handleSubmit() } }>Choose Pro</Button>
             </Box>
           </Grid>
         </Grid>

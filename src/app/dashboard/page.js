@@ -105,7 +105,6 @@ export default function DashBoard() {
                         sx={{ my: '20px' }}
                         justifyContent={'center'}
                         gap={'5px'}
-                        bgcolor={'gray'}
                         padding={'20px'}>
                         <Button variant="outlined" onClick={handleOpenCollections}>Collections</Button>
                         <Button variant="outlined" onClick={handleOpenDialog}>Generate Flashcards</Button>
