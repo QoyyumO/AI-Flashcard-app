@@ -1,5 +1,5 @@
 'use client'
-
+import Head from 'next/head';
 import Image from "next/image";
 import styles from "./page.module.css";
 import { Box, Typography, Button, Container, Grid } from "@mui/material";
