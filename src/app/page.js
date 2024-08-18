@@ -11,10 +11,6 @@ import getStripe from "../../Utils/get-stripe";
 export default function Home() {
   return (
     <Container maxWidth="md">
-        <Head>
-        <title>Flashcard SaaS - Create Flashcards Easily</title>
-        <meta name="description" content="The easiest way to create flashcards from your text." />
-      </Head>
       <Box sx={{textAlign: 'center', my: 4}}>
         <Typography variant="h2" component="h1" gutterBottom>
           Welcome to Flashcard SaaS

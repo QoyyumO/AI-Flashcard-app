@@ -1,6 +1,8 @@
 'use client';
+import { Timestamp } from "firebase/firestore";
 import { db } from '../firebaseConfig';
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { Container, Grid, Button, Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from "@mui/material";
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
@@ -34,14 +36,15 @@ export default function DashBoard() {
     
             const generatedFlashcards = await response.json();
             setFlashcards(generatedFlashcards.flashcards);
-    
+            console.log(generatedFlashcards);
             // Store each flashcard in Firestore
             const flashcardsCollection = collection(db, 'flashcards');
             for (const flashcard of generatedFlashcards.flashcards) {
                 await addDoc(flashcardsCollection, {
                     front: flashcard.front,
                     back: flashcard.back,
-                    userId: user.id // Assuming you have access to user ID from Clerk
+                    userId: user.id,// Assuming you have access to user ID from Clerk
+                    date: flashcard.date
                 });
             }
         } catch (error) {
@@ -76,10 +79,21 @@ export default function DashBoard() {
             });
     
             setFlashcards(userFlashcards); // Update your state with the user's flashcards
+            console.log(userFlashcards);
         } catch (error) {
             console.error('Error retrieving flashcards:', error);
         }
     };
+    const handleDeleteFlashcard = async (id) => {
+        try {
+            const flashcardDoc = doc(db, 'flashcards', id);
+            await deleteDoc(flashcardDoc);
+            setFlashcards(flashcards.filter(f => f.id !== id)); // Remove the deleted flashcard from the state
+        } catch (error) {
+            console.error('Error deleting flashcard:', error);
+        }
+    };
+    
 
     return (
         <Container>
@@ -111,14 +125,26 @@ export default function DashBoard() {
                                     padding: '10px',
                                     cursor: 'pointer',
                                     display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-between', // Ensure content is spaced out
                                     alignItems: 'center',
-                                    justifyContent: 'center',
                                     backgroundColor: flippedIndices.includes(index) ? '#d3f8d3' : '#f8d3d3' // Change background color based on flipped state
                                 }}>
                                 <p style={{ textAlign: 'center' }}>
                                     <strong>{flippedIndices.includes(index) ? 'Back:' : 'Front:'}</strong><br />
                                     {flippedIndices.includes(index) ? fc.back : fc.front}
                                 </p>
+                                <p style={{ textAlign: 'center' }}>
+                                  Created on: {fc.date}
+                                </p>
+                                <Button
+                                    variant="outlined"
+                                    color="secondary"
+                                    onClick={() => handleDeleteFlashcard(fc.id)}
+                                >
+                                    Delete
+                                </Button>
+
                             </Box>
                         </Grid>
                     ))}

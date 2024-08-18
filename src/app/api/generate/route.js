@@ -27,7 +27,7 @@ export async function POST(req) {
 
                         Create 10 flashcards for the topic: ${topic}. 
                         Return only valid JSON in the following format: 
-                        {"flashcards":[{"front": "Front of the card", "back": "Back of the card"}]} without any additional text or explanations.`,
+                        {"flashcards":[{"front": "Front of the card", "back": "Back of the card","date" : "give me 18-08-2022"}]} without any additional text or explanations.`,
                 },
             ],
             model: "llama3-8b-8192",
