@@ -13,7 +13,7 @@ export default function Home() {
   const [price, setPrice] = useState(0)
 
   const handleSubmit = async () => {
-    const checkoutSession = await fetch('/api/checkout_sessions', {
+    const checkoutSession = await fetch(`/api/checkout_sessions?session_id=${price}`, {
       method: 'POST',
       headers: { origin: 'http://localhost:3000' },
     })
