@@ -21,8 +21,8 @@ export async function POST(req) {
         line_items: [
           {
             price_data: {
-              currency: 'usd',
-              product_data: {
+                currency: 'gbp', 
+                product_data: {
                 name: 'Pro subscription',
               },
               unit_amount: formatAmountForStripe(price),
