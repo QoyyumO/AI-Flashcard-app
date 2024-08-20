@@ -47,7 +47,7 @@ export default function Home() {
             Get Started
           </Button>
         </Link>
-        <Link href="/dashboard" passHref>
+        <Link href="/sign-up" passHref>
           <Button variant="contained" color="primary" sx={{mt: 2, mr: 2}}>
             Learn More
           </Button>
