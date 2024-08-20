@@ -6,12 +6,23 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
     apiVersion: '2022-11-15',
   })
 
+<<<<<<< HEAD
   export async function POST(req) {
     const { price } = await req.json(); // Extract price from the request body
     const formatAmountForStripe = (amount, currency) => {
       return Math.round(amount * 100);
     };
   
+=======
+const formatAmountForStripe = (amount) => {
+    return Math.round(amount * 100)
+  }
+
+export async function POST(req) {
+  const { searchParams } = new URL(req.url);
+  const price = searchParams.get('price');
+
+>>>>>>> 2c27d6b144164b09d22274e4ff3f0d164dcd726f
     try {
       const params = {
         mode: 'subscription',
@@ -32,6 +43,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
             quantity: 1,
           },
         ],
+<<<<<<< HEAD
         success_url: `${req.headers.get('Referer')}result?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.get('Referer')}result?session_id={CHECKOUT_SESSION_ID}`,
       };
@@ -43,6 +55,21 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
       });
     } catch (error) {
       console.error('Error creating checkout session:', error);
+=======
+        success_url: `${req.headers.get('Referer')}/result?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.get('Referer')}/result?session_id={CHECKOUT_SESSION_ID}`,
+      
+      }
+      
+      const checkoutSession = await stripe.checkout.sessions.create(params)
+      console.log(checkoutSession)
+      return NextResponse.json(checkoutSession, {
+        status: 200,
+      })
+    } catch (error) {
+      console.log(error)
+      console.error('Error creating checkout session:', error)
+>>>>>>> 2c27d6b144164b09d22274e4ff3f0d164dcd726f
       return new NextResponse(JSON.stringify({ error: { message: error.message } }), {
         status: 500,
       });

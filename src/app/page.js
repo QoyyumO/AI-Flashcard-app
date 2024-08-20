@@ -1,15 +1,12 @@
 'use client'
-import Head from 'next/head';
-import Image from "next/image";
-import styles from "./page.module.css";
+
 import { Box, Typography, Button, Container, Grid } from "@mui/material";
-import Navbar from "./components/Navbar";
 import Link from 'next/link';
 import getStripe from "../../Utils/get-stripe";
-import { useState } from 'react';
 
 
 export default function Home() {
+<<<<<<< HEAD
     const handleSubmit = async (selectedPrice) => {
     const checkoutSession = await fetch('/api/checkout_sessions', {
       method: 'POST',
@@ -26,6 +23,19 @@ export default function Home() {
     }
   
     const checkoutSessionJson = await checkoutSession.json()
+=======
+
+  const handleSubmit = async (price) => {
+    const checkoutSession = await fetch(`/api/checkout_sessions?price=${price}`, {
+      method: 'POST',
+      headers: { origin: 'http://localhost:3000' }
+    })
+
+    
+
+    const checkoutSessionJson = await checkoutSession.json()
+    console.log(checkoutSessionJson? checkoutSessionJson : 'lanre')
+>>>>>>> 2c27d6b144164b09d22274e4ff3f0d164dcd726f
     const stripe = await getStripe()
     const { error } = await stripe.redirectToCheckout({
       sessionId: checkoutSessionJson.id,
@@ -133,8 +143,17 @@ export default function Home() {
               <Typography gutterBottom>
                 Access to basic feature and limited storage.
               </Typography>
+<<<<<<< HEAD
               <Button variant="contained" color="primary" onClick={() => handleSubmit(0.99)}>Choose Basic</Button>
 
+=======
+              <Button 
+              variant="contained" 
+              color="primary" 
+              onClick={() => {
+                 handleSubmit(0.99) 
+                 } }>Choose Basic</Button>
+>>>>>>> 2c27d6b144164b09d22274e4ff3f0d164dcd726f
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={6} >
@@ -151,7 +170,19 @@ export default function Home() {
               <Typography gutterBottom>
                 Unlimited flashcards and storage for your flashcards.
               </Typography>
+<<<<<<< HEAD
               <Button variant="contained" color="primary" onClick={() => handleSubmit(4.99)}>Choose Pro</Button>
+=======
+              <Button
+              variant="contained" 
+              color="primary" 
+              onClick={() => {
+                handleSubmit(4.99) 
+                }}
+                >
+                  Choose Pro
+                </Button>
+>>>>>>> 2c27d6b144164b09d22274e4ff3f0d164dcd726f
             </Box>
           </Grid>
         </Grid>

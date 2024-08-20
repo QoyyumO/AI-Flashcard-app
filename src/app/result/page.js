@@ -1,18 +1,21 @@
+'use client'
 
 import { useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { useRouter } from "next/router"
+import { Box, Container, CircularProgress, Typography } from "@mui/material"
 
-const ResultPage = () => {
-    const router = useRouter()
+
+export default function ResultPage () {
+    //const router = useRouter()
     const searchParams = useSearchParams()
     const session_id = searchParams.get('session_id')
     const [loading, setLoading] = useState(true)
     const [session, setSession] = useState(null)
     const [error, setError] = useState(null)
-  
+    
     useEffect(() => {
-        const fetchCheckoutSession = async () => {
+        const fetchCheckoutSession = async () => { 
           if (!session_id) return
           try {
             const res = await fetch(`/api/checkout_sessions?session_id=${session_id}`)
@@ -31,7 +34,9 @@ const ResultPage = () => {
         fetchCheckoutSession()
       }, [session_id])
 
-      if (loading) {
+
+
+    if (loading) {
         return (
           <Container maxWidth="sm" sx={{textAlign: 'center', mt: 4}}>
             <CircularProgress />
@@ -51,6 +56,10 @@ const ResultPage = () => {
           </Container>
         )
       }
+
+
+    
+      
 
       return (
         <Container maxWidth="sm" sx={{textAlign: 'center', mt: 4}}>
